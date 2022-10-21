@@ -25,8 +25,6 @@ class DocumentFile extends Model
     public function deleteFile(){
         if($this->exists){
             Storage::disk($this->disk)->delete($this->path);
-            // dd(public_path($this->path));
-            // Storage::disk($this->disk)->delete($this->path);
         }
     }
 
@@ -38,7 +36,6 @@ class DocumentFile extends Model
 
     static function createFile(string $disk, string $path, File $file): DocumentFile {
         $path = Storage::disk($disk)->put($path, $file);
-
         return DocumentFile::create([
             'disk' => $disk,
             'path' => $path

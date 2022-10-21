@@ -15,7 +15,6 @@ interface Props {
 
 export default function Show(props: Props) {
     let research = props.research;
-    console.log(research);
 
     return (
         <AppLayout

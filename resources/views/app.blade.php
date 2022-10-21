@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Scripts -->
+    <script>
+      window.LARAVEL_ASSET_URL = "{{ asset('') }}";
+    </script>
     @routes
     @viteReactRefresh
     @vite('resources/js/app.tsx')
@@ -18,7 +21,5 @@
   <body class="font-sans antialiased">
     @inertia
   </body>
-  <script>
-    window.LARAVEL_ASSET_URL = "{{ asset('') }}";
-  </script>
+
 </html>
