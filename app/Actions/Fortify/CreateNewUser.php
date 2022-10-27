@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -26,13 +27,24 @@ class CreateNewUser implements CreatesNewUsers
             'phone_number' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+            'NIM' => ['string', 'max:255', 'unique:user_profiles'],
+            'NIDN' => ['string', 'max:255', 'unique:user_profiles'],
+            'NIP_NIPH' => ['string', 'max:255', 'unique:user_profiles'],
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'phone_number' => $input['phone_number'],
             'password' => Hash::make($input['password']),
-        ])->assignRole('guest');
+        ])->assignRole($input['role']);
+        UserProfile::create([
+            'user_id' => $user->id,
+            'NIM' => $input['NIM'],
+            'NIDN' => $input['NIDN'],
+            'NIP_NIPH' => $input['NIP_NIPH'],
+        ]);
+
+        return $user;
     }
 }

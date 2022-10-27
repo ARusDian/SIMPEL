@@ -75,6 +75,10 @@ class User extends Authenticatable
         );
     }
 
+    public function userProfile(){
+        return $this->hasOne('App\Models\UserProfile', 'user_id');
+    }
+
     public function isAdmin() {
         return $this->hasAnyRole(['admin','super-admin']);
     }
