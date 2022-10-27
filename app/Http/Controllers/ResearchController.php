@@ -40,6 +40,9 @@ class ResearchController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->hasAnyRole(['guest'])){
+            return redirect()->route('dashboard')->with('error', 'You are not allowed to access this page.');
+        }
         $research_types = ResearchType::all();
         $research_document_categories = ResearchDocumentCategory::all();
         $users = User::with('roles')->get();
@@ -141,7 +144,9 @@ class ResearchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(Auth::user()->hasAnyRole(['guest'])){
+            return redirect()->route('dashboard')->with('error', 'You are not allowed to access this page.');
+        }
         return DB::transaction(function () use ($request) {
             $research = $request->validate([
                 'name'=>'required',

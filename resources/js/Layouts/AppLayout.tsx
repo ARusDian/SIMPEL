@@ -45,9 +45,8 @@ export default function AppLayout({
                                 <li>
                                     <InertiaLink href={route('research.create')}>
                                         Tambah Penelitian Baru
-                                </InertiaLink>
+                                    </InertiaLink>
                                 </li>
-                                <li><a>Item 3</a></li>
                             </ul>
                         </div>
                         <div className="navbar-end mr-10">
@@ -152,7 +151,7 @@ export default function AppLayout({
                             </>
                         ) : null
                         }
-                        
+
                         <div className="divider">Penelitian</div>
                         <li >
                             <div className="dropdown dropdown-hover dropdown-end ">

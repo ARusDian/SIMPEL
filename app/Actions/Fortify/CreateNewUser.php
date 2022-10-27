@@ -21,15 +21,16 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
+
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone_number' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
-            'NIM' => ['string', 'max:255', 'unique:user_profiles'],
-            'NIDN' => ['string', 'max:255', 'unique:user_profiles'],
-            'NIP_NIPH' => ['string', 'max:255', 'unique:user_profiles'],
+            'NIM' => $input['role'] == 'mahasiswa' ? ['string', 'max:255', 'unique:user_profiles'] : '',
+            'NIDN' => $input['role'] == 'dosen' ? ['string', 'max:255', 'unique:user_profiles'] : '',
+            'NIP_NIPH' => $input['role'] == 'dosen' ? ['string', 'max:255', 'unique:user_profiles'] : '',
         ])->validate();
 
         $user = User::create([
@@ -38,13 +39,16 @@ class CreateNewUser implements CreatesNewUsers
             'phone_number' => $input['phone_number'],
             'password' => Hash::make($input['password']),
         ])->assignRole($input['role']);
-        UserProfile::create([
-            'user_id' => $user->id,
-            'NIM' => $input['NIM'],
-            'NIDN' => $input['NIDN'],
-            'NIP_NIPH' => $input['NIP_NIPH'],
-        ]);
-
+        if($input['role'] == 'mahasiswa'){
+            $user->profile()->create([
+                'NIM' => $input['NIM'],
+            ]);
+        }else if($input['role'] == 'dosen'){
+            $user->profile()->create([
+                'NIDN' => $input['NIDN'],
+                'NIP_NIPH' => $input['NIP_NIPH'],
+            ]);
+        }  
         return $user;
     }
 }
