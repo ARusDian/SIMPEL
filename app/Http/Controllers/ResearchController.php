@@ -9,6 +9,7 @@ use App\Models\Research\ResearchType;
 use App\Models\Research\ResearchDocument;
 use App\Models\Research\ResearchDocumentCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Illuminate\Validation\Rule;
@@ -154,7 +155,7 @@ class ResearchController extends Controller
                 'research_type_id' => $research['research_type']['id'],
             ]);
             $this->store_has_many($research, $research_documents);
-            return redirect()->route('research.index')->with('success', 'Research created successfully.');
+            return redirect()->route('research.show', $research->id)->with('success', 'Research created successfully.');
         });
     }
 
@@ -182,15 +183,20 @@ class ResearchController extends Controller
     public function edit($id)
     {
         $research = Research::withAll()->find($id);
-        $research_types = ResearchType::all();
-        $research_document_categories = ResearchDocumentCategory::all();
-        $users = User::all();
-        return Inertia::render('Admin/Research/Edit', [
-            'research'=>$research,
-            'research_types'=>$research_types,
-            'research_document_categories' => $research_document_categories,
-            'users'=>$users
-        ]);
+        if ($research->userContributors[0]->id == Auth::user()->id || Auth::user()->isAdmin()){
+            $research_types = ResearchType::all();
+            $research_document_categories = ResearchDocumentCategory::all();
+            $users = User::all();
+            return Inertia::render('Admin/Research/Edit', [
+                'research'=>$research,
+                'research_types'=>$research_types,
+                'research_document_categories' => $research_document_categories,
+                'users'=>$users
+            ]);
+        }
+        else{
+            return redirect()->route('research.index')->with('error', 'You are not allowed to edit this research.');
+        }
     }
 
     /**
@@ -202,23 +208,23 @@ class ResearchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        return DB::transaction(function () use ($request, $id) {
-            $data = $request->validate([
-                'name'=>'required',
-                'description'=>'required',
-                'research_type.id'=>'required',
-            ]);
-            $research_documents = $this->validateData($request->all(), Research::find($id));
-            $research = Research::findOrFail($id);
-            $research->update([
-                'name' => $data['name'],
-                'description' => $data['description'],
-                'research_type_id' => $data['research_type']['id'],
-            ]);
-            $this->store_has_many($research, $research_documents, true);
-            return redirect()->route('research.show',['research' => $research['id']])->banner('Research updated successfully.');
-        });
+        //            
+        $research = Research::findOrFail($id);
+        if ($research->userContributors[0]->id == Auth::user()->id || Auth::user()->isAdmin()){
+            return DB::transaction(function () use ($request, $research) {
+                $research->update($request->validate([
+                    'name'=>'required',
+                    'description'=>'required',
+                    'research_type.id'=>'required',
+                ]));
+                $research_documents = $this->validateData($request->all(), $research);
+                $this->store_has_many($research, $research_documents, true);
+                return redirect()->route('research.show', $research->id)->with('success', 'Research updated successfully.');
+            });
+        }
+        else{
+            return redirect()->route('research.index')->with('error', 'You are not allowed to edit this research.');
+        }
     }
 
     /**
@@ -230,18 +236,22 @@ class ResearchController extends Controller
     public function destroy($id)
     {
         //
-        return DB::transaction(function () use ($id) {
-            $research = Research::findOrFail($id);
-            foreach ($research->ResearchDocuments as $research_document) {
-                $document_file = $research_document->documentFile->findOrFail($research_document['id']);
-                $document_file->deleteFile();
-                $document_file->deleteResearchDirectory($research['id']);
-            }
-            $research->ResearchDocuments()->delete();
-            $research->ResearchContributors()->delete();
-            $research->delete();
-            return redirect()->route('research.index')->banner('Research deleted successfully.');
-
-        });
+        $research = Research::findOrFail($id);
+        if ($research->userContributors[0]->id == Auth::user()->id || Auth::user()->isAdmin()){
+            return DB::transaction(function () use ($id, $research) {
+                foreach ($research->ResearchDocuments as $research_document) {
+                    $document_file = $research_document->documentFile->findOrFail($research_document['id']);
+                    $document_file->deleteFile();
+                    $document_file->deleteResearchDirectory($research['id']);
+                }
+                $research->ResearchDocuments()->delete();
+                $research->ResearchContributors()->delete();
+                $research->delete();
+                return redirect()->route('research.index')->banner('Research deleted successfully.');
+            });
+        }else{
+            return redirect()->route('research.index')->with('error', 'You are not allowed to delete this research.');
+        }
+            
     }
 }

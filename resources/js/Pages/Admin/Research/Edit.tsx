@@ -16,7 +16,6 @@ interface Props {
     research_document_categories: Array<ResearchDocumentCategory>,
 }
 
-
 export default function Edit(props: Props) {
     let page = useTypedPage<{ research: NewResearch }>();
     let form = useForm<NewResearch>(

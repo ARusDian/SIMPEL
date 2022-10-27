@@ -3,14 +3,14 @@ import { getStorageFileUrl } from "@/Models/FileModel";
 import { Research } from "@/Models/Research/Research";
 import { Inertia } from "@inertiajs/inertia";
 import { InertiaLink } from "@inertiajs/inertia-react";
-import { Delete } from "@mui/icons-material";
 import React from "react";
-import { confirmAlert } from "react-confirm-alert";
 import route from "ziggy-js";
-import Edit from "./Edit";
+import { User } from "@/types";
 
 interface Props {
     research: Research,
+    isAdministrator: boolean,
+    user : User,
 }
 
 export default function Show(props: Props) {
@@ -28,39 +28,42 @@ export default function Show(props: Props) {
                             <div className="flex-grow">
                                 Data Penelitian
                             </div>
-                            <div className="flex gap-3">
-                                <InertiaLink
-                                    className="btn btn-square btn-warning rounded py-2 px-10  focus:outline-none border-2"
-                                    href={route('research.edit', research.id)}
-                                >
-                                    Edit
-                                </InertiaLink>
-                                <button
-                                    type="submit"
-                                    className="btn btn-square btn-error rounded  py-2 px-10 focus:outline-none border-2 "
-                                >
-                                    <label htmlFor="my-modal">Delete</label>
-                                </button>
-                                <input type="checkbox" id="my-modal" className="modal-toggle" />
-                                <div className="modal">
-                                    <div className="modal-box">
-                                        <h3 className="font-bold text-lg">Confirm to Delete</h3>
-                                        <p className="py-4">Are you sure to do this.</p>
-                                        <div className="modal-action">
-                                            <label htmlFor="my-modal" className="btn btn-error"
-                                                onClick={
-                                                    () => {
-                                                        Inertia.post(route('research.destroy', research.id), {
-                                                            _method: 'DELETE',
-                                                        });
+                            {props.isAdministrator || research.research_contributors[0].user.id == props.user.id ?
+                                <div className="flex gap-3">
+                                    <InertiaLink
+                                        className="btn btn-square btn-warning rounded py-2 px-10  focus:outline-none border-2"
+                                        href={route('research.edit', research.id)}
+                                    >
+                                        Edit
+                                    </InertiaLink>
+                                    <button
+                                        type="submit"
+                                        className="btn btn-square btn-error rounded  py-2 px-10 focus:outline-none border-2 "
+                                    >
+                                        <label htmlFor="my-modal">Delete</label>
+                                    </button>
+                                    <input type="checkbox" id="my-modal" className="modal-toggle" />
+                                    <div className="modal">
+                                        <div className="modal-box">
+                                            <h3 className="font-bold text-lg">Confirm to Delete</h3>
+                                            <p className="py-4">Are you sure to do this.</p>
+                                            <div className="modal-action">
+                                                <label htmlFor="my-modal" className="btn btn-error"
+                                                    onClick={
+                                                        () => {
+                                                            Inertia.post(route('research.destroy', research.id), {
+                                                                _method: 'DELETE',
+                                                            });
+                                                        }
                                                     }
-                                                }
-                                            >Yes</label>
-                                            <label htmlFor="my-modal" className="btn">No!</label>
+                                                >Yes</label>
+                                                <label htmlFor="my-modal" className="btn">No!</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                : null
+                            }
                         </div>
                         <div className="flex-grow flex">
                             <div className="flex flex-col gap-2 basis-1/2">
@@ -94,17 +97,32 @@ export default function Show(props: Props) {
                                     Dokumen Penelitian
                                 </div>
                                 <div>
-                                    <ol className="list-decimal list-outside">
-                                        {research.research_documents.map((document) => {
-                                            return (
-                                                <li key={document.id} className="ml-8">
-                                                    <a href={getStorageFileUrl(document.document_file)} target="_blank" rel="noreferrer">
-                                                        {document.name}
-                                                    </a>
-                                                </li>
-                                            )
-                                        })}
-                                    </ol>
+                                    <table className="border">
+                                        <thead>
+                                            <tr>
+                                                <th className="border border-gray-300 px-4 py-2">Nama Dokumen</th>
+                                                <th className="border border-gray-300 px-4 py-2">Tipe Dokumen</th>
+                                                <th className="border border-gray-300 px-4 py-2">Kategori Dokumen</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {research.research_documents.map((document, index) =>
+                                                <tr key={index}>
+                                                    <td className="border border-gray-300 px-4 py-2">
+                                                        <a href={getStorageFileUrl(document.document_file)} target="_blank" rel="noreferrer">
+                                                            {document.name}
+                                                        </a>
+                                                    </td>
+                                                    <td className="border border-gray-300 px-4 py-2">
+                                                        {document.research_document_category.type}
+                                                    </td>
+                                                    <td className="border border-gray-300 px-4 py-2">
+                                                        {document.research_document_category.name}
+                                                    </td>
+                                                </tr>
+                                            )}
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

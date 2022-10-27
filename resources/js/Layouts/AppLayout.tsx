@@ -121,13 +121,6 @@ export default function AppLayout({
                                                     Users
                                                 </InertiaLink>
                                             </li>
-                                            <li className="z-50">
-                                                <InertiaLink
-                                                    href={route('user.index')}
-                                                >
-                                                    Roles
-                                                </InertiaLink>
-                                            </li>
                                         </ul>
                                     </div>
                                 </li>
@@ -157,7 +150,8 @@ export default function AppLayout({
                                     </div>
                                 </li>
                             </>
-                        ) : null}
+                        ) : null
+                        }
                         
                         <div className="divider">Penelitian</div>
                         <li >
@@ -167,7 +161,7 @@ export default function AppLayout({
                                 </label>
                                 <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 top-5 text-sm">
                                     <li className="z-50"><a href={route('research.index')}>Penelitian</a></li>
-                                    <li className="z-50"><a href={route('research.index')}>Jurnal</a></li>
+                                    <li className="z-50"><a href={route('research-document.index')}>Dokumen</a></li>
                                 </ul>
                             </div>
                         </li>

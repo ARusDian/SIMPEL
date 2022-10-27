@@ -16,8 +16,6 @@ interface Props {
 
 export default function Index(props: Props) {
     const researches = props.researches;
-    console.log(researches[0]);
-
 
     const dataColumns = [
         {
