@@ -19,13 +19,11 @@ interface Props {
 
 
 export default function Create(props: Props) {
-    console.log(props);
     let form = useForm<NewResearch>(
         createDefaultResearch(props.user),
     );
 
     function onSubmit(e: React.FormEvent) {
-        console.log(form.data.research_documents);
         e.preventDefault();
         form.clearErrors();
         form.post(route('research.store'), {
