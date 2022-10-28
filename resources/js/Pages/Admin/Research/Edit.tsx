@@ -19,9 +19,9 @@ interface Props {
 }
 
 export default function Edit(props: Props) {
-    let page = useTypedPage<{ research: NewResearch }>();
+    let research = props.research
     let form = useForm<NewResearch>(
-        page.props.research,
+        research
     );
 
     function onSubmit(e: React.FormEvent) {
@@ -30,7 +30,7 @@ export default function Edit(props: Props) {
         // php does'nt support PUT so...
         // @ts-ignore
         form.data._method = 'PUT';
-        form.post(route('research.update',page.props.research.id), {
+        form.post(route('research.update', research.id), {
             onError: (errors) => {
                 console.log(form.data);
                 console.log(errors);
