@@ -1,13 +1,15 @@
-import useTypedPage from "@/Hooks/useTypedPage";
-import AppLayout from "@/Layouts/AppLayout";
-import { NewResearch } from "@/Models/Research/Research";
-import { ResearchDocumentCategory } from "@/Models/Research/ResearchDocumentCategory";
-import { ResearchType } from "@/Models/Research/ResearchType";
-import { User } from "@/types";
-import { useForm } from "@inertiajs/inertia-react";
-import React from "react";
-import route from "ziggy-js";
-import Form from "./Form/Form";
+import React from 'react';
+import route from 'ziggy-js';
+
+import useTypedPage from '@/Hooks/useTypedPage';
+import AppLayout from '@/Layouts/AppLayout';
+import { NewResearch } from '@/Models/Research/Research';
+import { ResearchDocumentCategory } from '@/Models/Research/ResearchDocumentCategory';
+import { ResearchType } from '@/Models/Research/ResearchType';
+import { User } from '@/types';
+import { useForm } from '@inertiajs/inertia-react';
+
+import Form from './Form/Form';
 
 interface Props {
     research: NewResearch,

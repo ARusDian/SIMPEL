@@ -1,15 +1,17 @@
 import React from 'react';
-import { InertiaFormProps } from "@inertiajs/inertia-react";
-import { NewResearch } from '@/Models/Research/Research';
-import { ErrorHelper } from '@/Models/ErrorHelper'
+import Select from 'react-select';
+
 import JetInput from '@/Components/Jetstream/Input';
 import InputError from '@/Components/Jetstream/InputError';
-import Select from 'react-select';
-import ContributorForm from './ContibutorsForm';
-import { User } from '@/types';
-import DocumentsForm from './DocumentsForm';
-import { ResearchType } from '@/Models/Research/ResearchType';
+import { ErrorHelper } from '@/Models/ErrorHelper';
+import { NewResearch } from '@/Models/Research/Research';
 import { ResearchDocumentCategory } from '@/Models/Research/ResearchDocumentCategory';
+import { ResearchType } from '@/Models/Research/ResearchType';
+import { User } from '@/types';
+import { InertiaFormProps } from '@inertiajs/inertia-react';
+
+import ContributorForm from './ContibutorsForm';
+import DocumentsForm from './DocumentsForm';
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
     form: InertiaFormProps<NewResearch>,

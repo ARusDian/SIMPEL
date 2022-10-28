@@ -1,12 +1,13 @@
 import React from 'react';
+
+import SectionBorder from '@/Components/Jetstream/SectionBorder';
+import useTypedPage from '@/Hooks/useTypedPage';
+import AppLayout from '@/Layouts/AppLayout';
 import DeleteUserForm from '@/Pages/Profile/Partials/DeleteUserForm';
 import LogoutOtherBrowserSessions from '@/Pages/Profile/Partials/LogoutOtherBrowserSessionsForm';
 import TwoFactorAuthenticationForm from '@/Pages/Profile/Partials/TwoFactorAuthenticationForm';
 import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm';
-import useTypedPage from '@/Hooks/useTypedPage';
-import SectionBorder from '@/Components/Jetstream/SectionBorder';
-import AppLayout from '@/Layouts/AppLayout';
 import { Session } from '@/types';
 
 interface Props {

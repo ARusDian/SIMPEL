@@ -1,10 +1,13 @@
-import AddNewHeader from "@/Components/AddNewHeader";
-import {  NewResearch } from "@/Models/Research/Research";
-import { createDefaultResearchContributor, NewResearchContributor } from "@/Models/Research/ResearchContributor";
-import { User } from "@/types";
-import { InertiaFormProps } from "@inertiajs/inertia-react";
-import React from "react";
-import Select from "react-select";
+import React from 'react';
+import Select from 'react-select';
+
+import AddNewHeader from '@/Components/AddNewHeader';
+import { NewResearch } from '@/Models/Research/Research';
+import {
+    createDefaultResearchContributor, NewResearchContributor
+} from '@/Models/Research/ResearchContributor';
+import { User } from '@/types';
+import { InertiaFormProps } from '@inertiajs/inertia-react';
 
 interface Props {
     form: InertiaFormProps<NewResearch>,

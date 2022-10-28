@@ -1,11 +1,12 @@
-import AppLayout from "@/Layouts/AppLayout";
-import { getStorageFileUrl } from "@/Models/FileModel";
-import { Research } from "@/Models/Research/Research";
-import { Inertia } from "@inertiajs/inertia";
-import { InertiaLink } from "@inertiajs/inertia-react";
-import React from "react";
-import route from "ziggy-js";
-import { User } from "@/types";
+import React from 'react';
+import route from 'ziggy-js';
+
+import AppLayout from '@/Layouts/AppLayout';
+import { getStorageFileUrl } from '@/Models/FileModel';
+import { Research } from '@/Models/Research/Research';
+import { User } from '@/types';
+import { Inertia } from '@inertiajs/inertia';
+import { InertiaLink } from '@inertiajs/inertia-react';
 
 interface Props {
     research: Research,

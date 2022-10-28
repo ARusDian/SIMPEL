@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ResearchController;
 use App\Http\Controllers\ResearchDocumentController;
+use App\Http\Controllers\ResearchDocumentCategoryController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -43,4 +44,5 @@ Route::middleware([
     Route::resource('/user', UserController::class);
     Route::resource('/research', ResearchController::class);
     Route::resource('/research-document', ResearchDocumentController::class);
+    Route::resource('/research-document-category', ResearchDocumentCategoryController::class);
 });

@@ -1,14 +1,16 @@
-import AddNewHeader from "@/Components/AddNewHeader";
-import { NewResearch } from "@/Models/Research/Research";
-import { NewResearchDocument, createDefaultResearchDocument } from "@/Models/Research/ResearchDocument";
-import { InertiaFormProps } from "@inertiajs/inertia-react";
-import React from "react";
-import { Viewer } from "@react-pdf-viewer/core";
-import { Worker } from '@react-pdf-viewer/core';
-import { getUniqueKey } from "@/Models/Helper";
-import { getStorageFileUrl } from "@/Models/FileModel";
-import { ResearchDocumentCategory } from "@/Models/Research/ResearchDocumentCategory";
-import Select from "react-select";
+import React from 'react';
+import Select from 'react-select';
+
+import AddNewHeader from '@/Components/AddNewHeader';
+import { getStorageFileUrl } from '@/Models/FileModel';
+import { getUniqueKey } from '@/Models/Helper';
+import { NewResearch } from '@/Models/Research/Research';
+import {
+    createDefaultResearchDocument, NewResearchDocument
+} from '@/Models/Research/ResearchDocument';
+import { ResearchDocumentCategory } from '@/Models/Research/ResearchDocumentCategory';
+import { InertiaFormProps } from '@inertiajs/inertia-react';
+import { Viewer, Worker } from '@react-pdf-viewer/core';
 
 interface Props {
     form: InertiaFormProps<NewResearch>,

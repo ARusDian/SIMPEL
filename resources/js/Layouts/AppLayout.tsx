@@ -129,7 +129,7 @@ export default function AppLayout({
                                 <li >
                                     <div className="dropdown dropdown-hover dropdown-end">
                                         <label tabIndex={0} className="">
-                                            Data Penelitian dan Pengabdian
+                                            Penelitian
                                         </label>
                                         <ul tabIndex={0} className="dropdown-content menu p-2 gap-2 shadow bg-base-100 rounded-box w-60 top-5 text-sm">
                                             <li className="z-50">
@@ -146,6 +146,14 @@ export default function AppLayout({
                                                     href={route('research-document.index')}
                                                 >
                                                     Dokumen Penelitian
+                                                </InertiaLink>
+                                            </li>
+                                            <li className="z-50">
+                                                <InertiaLink
+                                                    className=""
+                                                    href={route('research-document-category.index')}
+                                                >
+                                                    Kategori Dokumen Penelitian
                                                 </InertiaLink>
                                             </li>
                                         </ul>
