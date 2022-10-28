@@ -15,7 +15,7 @@ interface Props {
 
 export default function Show(props: Props) {
     let research = props.research;
-    console.log(research);
+    research.research_documents = research.research_documents.sort((a, b) => a.research_document_category.type < b.research_document_category.type ? 1 : -1);
     return (
         <AppLayout
             title={`Penelitian ${research.name}`}
