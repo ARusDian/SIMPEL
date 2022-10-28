@@ -1,10 +1,11 @@
-import Banner from "@/Components/Jetstream/Banner";
-import ResponsiveNavLink from "@/Components/Jetstream/ResponsiveNavLink";
-import useRoute from "@/Hooks/useRoute";
-import useTypedPage from "@/Hooks/useTypedPage";
-import { Inertia } from "@inertiajs/inertia";
-import { Head, InertiaLink } from "@inertiajs/inertia-react";
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from 'react';
+
+import Banner from '@/Components/Jetstream/Banner';
+import ResponsiveNavLink from '@/Components/Jetstream/ResponsiveNavLink';
+import useRoute from '@/Hooks/useRoute';
+import useTypedPage from '@/Hooks/useTypedPage';
+import { Inertia } from '@inertiajs/inertia';
+import { Head, InertiaLink } from '@inertiajs/inertia-react';
 
 interface Props {
     title: string;
@@ -29,7 +30,6 @@ export default function AppLayout({
         <div>
             <Head title={title} />
             <Banner />
-
             <div className="drawer">
                 <input id="my-drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">

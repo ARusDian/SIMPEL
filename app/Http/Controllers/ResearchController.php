@@ -41,7 +41,7 @@ class ResearchController extends Controller
     public function create()
     {
         if(Auth::user()->hasAnyRole(['guest'])){
-            return redirect()->route('dashboard')->with('error', 'You are not allowed to access this page.');
+            return redirect()->route('dashboard')->banner('You are not allowed to access this page.');
         }
         $research_types = ResearchType::all();
         $research_document_categories = ResearchDocumentCategory::all();
@@ -145,7 +145,7 @@ class ResearchController extends Controller
     public function store(Request $request)
     {
         if(Auth::user()->hasAnyRole(['guest'])){
-            return redirect()->route('dashboard')->with('error', 'You are not allowed to access this page.');
+            return redirect()->route('dashboard')->banner('You are not allowed to access this page.');
         }
         return DB::transaction(function () use ($request) {
             $research = $request->validate([
@@ -160,7 +160,7 @@ class ResearchController extends Controller
                 'research_type_id' => $research['research_type']['id'],
             ]);
             $this->store_has_many($research, $research_documents);
-            return redirect()->route('research.show', $research->id)->with('success', 'Research created successfully.');
+            return redirect()->route('research.show', $research->id)->banner('Research created successfully.');
         });
     }
 
@@ -200,7 +200,7 @@ class ResearchController extends Controller
             ]);
         }
         else{
-            return redirect()->route('research.index')->with('error', 'You are not allowed to edit this research.');
+            return redirect()->route('research.index')->banner('You are not allowed to edit this research.');
         }
     }
 
@@ -224,11 +224,11 @@ class ResearchController extends Controller
                 ]));
                 $research_documents = $this->validateData($request->all(), $research);
                 $this->store_has_many($research, $research_documents, true);
-                return redirect()->route('research.show', $research->id)->with('success', 'Research updated successfully.');
+                return redirect()->route('research.show', $research->id)->banner('Research updated successfully.');
             });
         }
         else{
-            return redirect()->route('research.index')->with('error', 'You are not allowed to edit this research.');
+            return redirect()->route('research.index')->banner('You are not allowed to edit this research.');
         }
     }
 
@@ -255,7 +255,7 @@ class ResearchController extends Controller
                 return redirect()->route('research.index')->banner('Research deleted successfully.');
             });
         }else{
-            return redirect()->route('research.index')->with('error', 'You are not allowed to delete this research.');
+            return redirect()->route('research.index')->banner('You are not allowed to delete this research.');
         }
             
     }

@@ -1,7 +1,8 @@
-import { Page } from '@inertiajs/inertia';
-import { usePage } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React, { useState } from 'react';
+
+import { Page } from '@inertiajs/inertia';
+import { usePage } from '@inertiajs/inertia-react';
 
 export default function Banner() {
   const [show, setShow] = useState(true);
