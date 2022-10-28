@@ -18,7 +18,7 @@ class ResearchDocumentCategoryController extends Controller
         //
         $researchDocumentCategories = ResearchDocumentCategory::all();
         return Inertia::render('Admin/ResearchDocumentCategory/Index', [
-            'researchDocumentCategories' => $researchDocumentCategories
+            'research_document_categories' => $researchDocumentCategories
         ]);
     }
 
@@ -42,6 +42,12 @@ class ResearchDocumentCategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $research_document_category = $request->validate([
+            'name' => 'required|string',
+            'type' => 'required|string|in:luaran,lainnya',
+        ]);
+        ResearchDocumentCategory::create($research_document_category);
+        return redirect()->route('research-document-category.index')->banner('Research Document Category created successfully.');
     }
 
     /**
@@ -64,6 +70,10 @@ class ResearchDocumentCategoryController extends Controller
     public function edit($id)
     {
         //
+        $research_document_category = ResearchDocumentCategory::findOrFail($id);
+        return Inertia::render('Admin/ResearchDocumentCategory/Edit', [
+            'research_document_category' => $research_document_category
+        ]);
     }
 
     /**
@@ -76,6 +86,12 @@ class ResearchDocumentCategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $research_document_category = $request->validate([
+            'name' => 'required|string',
+            'type' => 'required|string|in:luaran,lainnya',
+        ]);
+        ResearchDocumentCategory::findOrFail($id)->update($research_document_category);
+        return redirect()->route('research-document-category.index')->banner('Research Document Category updated successfully.');
     }
 
     /**
@@ -87,5 +103,7 @@ class ResearchDocumentCategoryController extends Controller
     public function destroy($id)
     {
         //
+        $research_document_category = ResearchDocumentCategory::findOrFail($id)->delete();
+        return redirect()->route('research-document-category.index')->banner('Research Document Category deleted successfully.');
     }
 }
