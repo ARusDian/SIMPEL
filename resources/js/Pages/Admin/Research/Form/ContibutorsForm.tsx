@@ -16,6 +16,8 @@ interface Props {
 
 export default function ContributorForm(props: Props) {
 
+    const users = props.users.filter((user) => user.roles[0].name != 'guest');
+
     function handleChange<T>(callback: (args0: T) => void) {
         return (e: T) => {
             callback(e);
@@ -49,11 +51,11 @@ export default function ContributorForm(props: Props) {
                                         <Select
                                             id="research_leader"
                                             key={`contributor-${index}-name`}
-                                            options={props.users}
+                                            options={users}
                                             getOptionValue={(option) => option.id.toString()}
                                             // getOptionLabel={(option) => `${option.name} - ${option.roles.map((role) => role.name).join(', ')}`}
                                             getOptionLabel={(option) => `${option.name}`}
-                                            value={props.users.find((user) => user.id === contributor.user.id)}
+                                            value={users.find((user) => user.id === contributor.user.id)}
                                             onChange={handleChange((value: any) => {
                                                 if (typeof value === 'object') {
                                                     props.contributors[index].user = value;
@@ -73,11 +75,10 @@ export default function ContributorForm(props: Props) {
                                             <Select
                                                 id="research_contributor"
                                                 key={`contributor-${index}-name`}
-                                                options={props.users}
+                                                options={users}
                                                 getOptionValue={(option) => option.id.toString()}
-                                                // getOptionLabel={(option) => `${option.name} - ${option.roles.map((role) => role.name).join(', ')}`}
-                                                getOptionLabel={(option) => `${option.name}`}
-                                                value={props.users.find((user) => user.id === contributor.user.id)}
+                                                getOptionLabel={(option) => `${option.name} - ${option.roles.map((role) => role.name).join(', ')}`}
+                                                value={users.find((user) => user.id === contributor.user.id)}
                                                 onChange={handleChange((value: any) => {
                                                     if(typeof value === 'object') {
                                                         props.contributors[index].user = value;
