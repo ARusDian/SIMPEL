@@ -58,7 +58,7 @@ class Research extends Model
             'researchType', 
             'researchDocuments.documentFile', 
             'researchDocuments.researchDocumentCategory',
-            'researchContributors.user', 
+            'researchContributors.user.roles', 
             'userContributors',
         ];
     }

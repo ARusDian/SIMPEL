@@ -15,7 +15,7 @@ interface Props {
 
 export default function Show(props: Props) {
     let research = props.research;
-
+    console.log(research);
     return (
         <AppLayout
             title={`Penelitian ${research.name}`}
@@ -65,7 +65,7 @@ export default function Show(props: Props) {
                                 : null
                             }
                         </div>
-                        <div className="flex-grow flex">
+                        <div className="flex-grow flex gap-5">
                             <div className="flex flex-col gap-2 basis-1/2">
                                 <div>
                                     Nama Penelitian : <strong>{research.name}</strong>
@@ -81,15 +81,26 @@ export default function Show(props: Props) {
                                 </div>
                                 <div>
                                     Daftar Kontributor
-                                    <ol className="list-decimal list-outside">
+                                    <table className="border table table-zebra w-full">
+                                        <thead>
+                                            <tr>
+                                                <th className="border border-gray-300 px-4 py-2">Nama anggota</th>
+                                                <th className="border border-gray-300 px-4 py-2">Jabatab</th>
+                                                <th className="border border-gray-300 px-4 py-2">Kontribusi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                         {research.research_contributors.map((contributor) => {
                                             return (
-                                                <li key={contributor.id} className="ml-8">
-                                                    {contributor.user.name} - <strong>{contributor.contributor_type}</strong>
-                                                </li>
+                                                <tr key={contributor.id} className="ml-8">
+                                                    <td>{contributor.user.name}</td>
+                                                    <td>{contributor.user.roles[0].name}</td>
+                                                    <td><strong>{contributor.contributor_type}</strong></td>
+                                                </tr>
                                             )
                                         })}
-                                    </ol>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-2 basis-1/2">
@@ -97,7 +108,7 @@ export default function Show(props: Props) {
                                     Dokumen Penelitian
                                 </div>
                                 <div>
-                                    <table className="border">
+                                    <table className="border table table-zebra w-full">
                                         <thead>
                                             <tr>
                                                 <th className="border border-gray-300 px-4 py-2">Nama Dokumen</th>

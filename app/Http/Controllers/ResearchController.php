@@ -191,7 +191,7 @@ class ResearchController extends Controller
         if ($research->userContributors[0]->id == Auth::user()->id || Auth::user()->isAdmin()){
             $research_types = ResearchType::all();
             $research_document_categories = ResearchDocumentCategory::all();
-            $users = User::all();
+            $users = User::with('roles')->get();
             return Inertia::render('Admin/Research/Edit', [
                 'research'=>$research,
                 'research_types'=>$research_types,

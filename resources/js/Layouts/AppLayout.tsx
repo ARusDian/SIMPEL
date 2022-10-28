@@ -1,3 +1,4 @@
+import Banner from "@/Components/Jetstream/Banner";
 import ResponsiveNavLink from "@/Components/Jetstream/ResponsiveNavLink";
 import useRoute from "@/Hooks/useRoute";
 import useTypedPage from "@/Hooks/useTypedPage";
@@ -27,6 +28,8 @@ export default function AppLayout({
     return (
         <div>
             <Head title={title} />
+            <Banner />
+
             <div className="drawer">
                 <input id="my-drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
