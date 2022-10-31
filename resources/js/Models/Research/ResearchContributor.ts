@@ -1,4 +1,4 @@
-import { BaseUser, User } from "@/types";
+import { BaseUser, User } from '@/types';
 
 export interface BaseResearchContributor{
     id?: number,
