@@ -28,7 +28,6 @@ export default function Index(props: Props) {
 
     return (
         <AppLayout title={"Research Document Category"}>
-            <div className='py-12'>
                 <div className="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <div className="p-6 sm:px-20 bg-white border-b border-gray-200">
@@ -86,7 +85,6 @@ export default function Index(props: Props) {
                         </div>
                     </div>
                 </div>
-            </div>
         </AppLayout>
     )
 }
