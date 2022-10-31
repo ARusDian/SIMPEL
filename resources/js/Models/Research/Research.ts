@@ -1,15 +1,17 @@
-import { User } from "@/types";
-import { NewResearchContributor, ResearchContributor } from "./ResearchContributor";
-import { BaseResearchDocument, NewResearchDocument, ResearchDocument } from "./ResearchDocument";
-import { ResearchType } from "./ResearchType";
+import { User } from '@/types';
 
+import {
+    BaseResearchContributor, NewResearchContributor, ResearchContributor
+} from './ResearchContributor';
+import { BaseResearchDocument, NewResearchDocument, ResearchDocument } from './ResearchDocument';
+import { ResearchType } from './ResearchType';
 
 export interface BaseResearch { 
     id?: number;
     name: string,
     description: string,
     research_type: ResearchType,
-    research_contributors: Array<ResearchContributor>,
+    research_contributors: Array<BaseResearchContributor>,
     research_documents: Array<BaseResearchDocument>,
 }
 
@@ -20,6 +22,7 @@ export interface NewResearch extends BaseResearch {
 
 export interface Research extends BaseResearch{
     id: number;
+    research_contributors: Array<ResearchContributor>,
     research_documents: Array<ResearchDocument>;
 }
 
