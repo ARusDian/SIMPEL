@@ -43,8 +43,9 @@ Route::middleware([
 ])->group(function () {
     Route::get('/user/profile', [UserProfileController::class, 'show'])->name('profile.show');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/research-document', [ResearchDocumentController::class, 'index'])->name('research-document.index');
-    Route::resource('/research', ResearchController::class);
+    Route::middleware(['role:admin|super-admin|dosen|mahasiswa'])->group(function(){
+        Route::resource('/research', ResearchController::class);
+    });
     Route::middleware(['role:admin|super-admin'])->group(function () {
         Route::resource('/research-type', ResearchTypeController::class);
         Route::resource('/research-document-category', ResearchDocumentCategoryController::class);
@@ -52,4 +53,7 @@ Route::middleware([
             Route::resource('/user', UserController::class);
         });
     });
+    Route::get('/research', [ResearchController::class, 'index'])->name('research.index');
+    Route::get('/research/show/{id}', [ResearchController::class, 'show'])->name('research.show');    
+    Route::get('/research-document', [ResearchDocumentController::class, 'index'])->name('research-document.index');
 });

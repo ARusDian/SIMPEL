@@ -18,11 +18,11 @@ return new class extends Migration
             $table->enum('contributor_type', ['ketua', 'anggota']);
             $table->foreignId('research_id')
                 ->constrained('researches')
-                ->restrictOnDelete()
+                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('user_id')
                 ->constrained('users')
-                ->restrictOnDelete()
+                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();
         });

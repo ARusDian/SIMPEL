@@ -105,14 +105,14 @@ class ResearchController extends Controller
     }
     
     public function store_has_many(Research $research, $data, $isUpdate = false){
+        $researchContributors = [];
         foreach($data['research_contributors'] as $contributor){
-            $research->researchContributors()->updateOrCreate([
-                'id' => $contributor['id'] ?? null,
-            ], [
+            $researchContributors[$contributor['user']['id']] = [
                 'contributor_type' => $contributor['contributor_type'],
-                'user_id' => $contributor['user']['id'],
-            ]);
+            ];
         }
+        
+        $research->userContributors()->sync($researchContributors,$isUpdate);
         
         foreach($data['research_documents'] as $research_document){
             $document_file = null;
