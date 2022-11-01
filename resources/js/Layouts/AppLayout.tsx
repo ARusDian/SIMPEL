@@ -60,7 +60,7 @@ export default function AppLayout({
                                     </div>
                                 </label>
                                 <ul tabIndex={0} className="dropdown-content menu p-2 gap-2 shadow bg-base-100 rounded-box w-40 top-10">
-                                    <li>
+                                    {/* <li>
                                         <div className="flex items-center px-4">
                                             {page.props.jetstream.managesProfilePhotos ? (
                                                 <div className="flex-shrink-0 mr-3">
@@ -71,17 +71,8 @@ export default function AppLayout({
                                                     />
                                                 </div>
                                             ) : null}
-
-                                            <div>
-                                                <div className="font-medium text-base text-gray-800">
-                                                    {page.props.user.name}
-                                                </div>
-                                                <div className="font-medium text-sm text-gray-500">
-                                                    {page.props.user.email}
-                                                </div>
-                                            </div>
                                         </div>
-                                    </li>
+                                    </li> */}
                                     <li className="z-50">
                                         <ResponsiveNavLink
                                             href={route('profile.show')}
