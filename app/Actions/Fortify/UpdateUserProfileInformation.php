@@ -43,6 +43,12 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'phone_number' => $input['phone_number'],
             ])->save();
         }
+
+        if($input['NIM'] !== null){
+            $user->userProfile()->update([
+                'NIM' => $input['NIM'],
+            ]);
+        }
     }
 
     /**

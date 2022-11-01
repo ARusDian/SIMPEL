@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\Fortify\UserProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ResearchController;
@@ -40,6 +41,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    Route::get('/user/profile', [UserProfileController::class, 'show'])->name('profile.show');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/research-document', [ResearchDocumentController::class, 'index'])->name('research-document.index');
     Route::resource('/research', ResearchController::class);

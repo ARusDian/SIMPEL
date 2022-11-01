@@ -8,18 +8,21 @@ import LogoutOtherBrowserSessions from '@/Pages/Profile/Partials/LogoutOtherBrow
 import TwoFactorAuthenticationForm from '@/Pages/Profile/Partials/TwoFactorAuthenticationForm';
 import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm';
-import { Session } from '@/types';
+import { Session, User } from '@/types';
 
 interface Props {
   sessions: Session[];
   confirmsTwoFactorAuthentication: boolean;
+  user: User;
 }
 
 export default function Show({
   sessions,
   confirmsTwoFactorAuthentication,
+  user,
 }: Props) {
   const page = useTypedPage();
+  console.log(user)
 
   return (
     <AppLayout
@@ -34,7 +37,7 @@ export default function Show({
         <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
           {page.props.jetstream.canUpdateProfileInformation ? (
             <div>
-              <UpdateProfileInformationForm user={page.props.user} />
+              <UpdateProfileInformationForm user={user} />
 
               <SectionBorder />
             </div>
