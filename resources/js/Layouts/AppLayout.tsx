@@ -143,6 +143,14 @@ export default function AppLayout({
                                             <li className="z-50">
                                                 <InertiaLink
                                                     className=""
+                                                    href={route('research-type.index')}
+                                                >
+                                                    Tipe Penelitian
+                                                </InertiaLink>
+                                            </li>
+                                            <li className="z-50">
+                                                <InertiaLink
+                                                    className=""
                                                     href={route('research-document.index')}
                                                 >
                                                     Dokumen Penelitian
@@ -156,6 +164,7 @@ export default function AppLayout({
                                                     Kategori Dokumen Penelitian
                                                 </InertiaLink>
                                             </li>
+                                            
                                         </ul>
                                     </div>
                                 </li>

@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ResearchController;
 use App\Http\Controllers\ResearchDocumentController;
 use App\Http\Controllers\ResearchDocumentCategoryController;
+use App\Http\Controllers\ResearchTypeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -44,6 +45,7 @@ Route::middleware([
     Route::get('/research-document', [ResearchDocumentController::class, 'index'])->name('research-document.index');
     Route::resource('/research', ResearchController::class);
     Route::middleware(['role:admin|super-admin'])->group(function () {
+        Route::resource('/research-type', ResearchTypeController::class);
         Route::resource('/research-document-category', ResearchDocumentCategoryController::class);
         Route::middleware(['role:super-admin'])->group(function () {
             Route::resource('/user', UserController::class);
