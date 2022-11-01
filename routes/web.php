@@ -41,8 +41,12 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-    Route::resource('/user', UserController::class);
+    Route::get('/research-document', [ResearchDocumentController::class, 'index'])->name('research-document.index');
     Route::resource('/research', ResearchController::class);
-    Route::resource('/research-document', ResearchDocumentController::class);
-    Route::resource('/research-document-category', ResearchDocumentCategoryController::class);
+    Route::middleware(['role:admin|super-admin'])->group(function () {
+        Route::resource('/research-document-category', ResearchDocumentCategoryController::class);
+        Route::middleware(['role:super-admin'])->group(function () {
+            Route::resource('/user', UserController::class);
+        });
+    });
 });
