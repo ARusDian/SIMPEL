@@ -22,7 +22,6 @@ export default function Show({
   user,
 }: Props) {
   const page = useTypedPage();
-  console.log(user)
 
   return (
     <AppLayout
