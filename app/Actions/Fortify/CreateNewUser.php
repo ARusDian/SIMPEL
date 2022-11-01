@@ -40,11 +40,11 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
         ])->assignRole($input['role']);
         if($input['role'] == 'mahasiswa'){
-            $user->profile()->create([
+            $user->userProfile()->create([
                 'NIM' => $input['NIM'],
             ]);
         }else if($input['role'] == 'dosen'){
-            $user->profile()->create([
+            $user->userProfile()->create([
                 'NIDN' => $input['NIDN'],
                 'NIP_NIPH' => $input['NIP_NIPH'],
             ]);

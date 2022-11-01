@@ -17,8 +17,6 @@ interface Props {
 export default function Index(props: Props) {
     const users = props.users;
 
-    console.log(props);
-
     function onDelete(e: React.FormEvent, id: number) {
         e.preventDefault();
         console.log('calling confirm alert');
@@ -66,8 +64,18 @@ export default function Index(props: Props) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <div className="p-6 sm:px-20 bg-white border-b border-gray-200">
-                            <div className="mt-8 text-2xl">
-                                Users
+                            <div className="flex justify-between">
+                                <div className="mt-8 text-2xl">
+                                    Users
+                                </div>
+                                <div className='align-bottom'>
+                                    <InertiaLink
+                                        href={route('user.create')}
+                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-auto"
+                                    >
+                                        Tambah User
+                                    </InertiaLink>
+                                </div>
                             </div>
                             <div className="mt-6 text-gray-500">
                                 <MaterialReactTable
@@ -84,20 +92,9 @@ export default function Index(props: Props) {
                                     muiTableBodyRowProps={{ hover: false }}
                                     renderRowActions={({ row }) => (
                                         <div className="flex items-center justify-center gap-2">
-                                            <InertiaLink
-                                                className="bg-yellow-600 btn btn-square rounded p-2  focus:outline-none border-2 border-orange-400 text-white"
-                                                href={route('user.edit', row.original.id)}
-                                            >
-                                                <Edit className="" />
+                                            <InertiaLink href={route('user.show', row.original.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                                Show
                                             </InertiaLink>
-                                            <form onSubmit={(event)=> onDelete(event, row.original.id)}>
-                                                <button
-                                                    type="submit"
-                                                    className="bg-red-600 btn btn-square rounded p-2 focus:outline-none border-2 border-red-400 text-white"
-                                                >
-                                                    <Delete />
-                                                </button>
-                                            </form>
                                         </div>
                                     )}
                                 />
