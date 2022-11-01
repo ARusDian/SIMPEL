@@ -18,8 +18,6 @@ export default function Form(props: Props) {
     let form = props.form;
     let errors = new ErrorHelper(form.errors);
 
-    console.log(form.data);
-
     return (
         <div className={`flex-col gap-5 ${props.className}`}>
             <div className="form-control w-full">
@@ -50,7 +48,7 @@ export default function Form(props: Props) {
                     <option value="luaran">Luaran</option>
                     <option value="lainnya">Lainnya</option>
                 </select>
-                <InputError message={errors.get('name')} className="mt-2" />
+                <InputError message={errors.get('type')} className="mt-2" />
             </div>
         </div>
     )
