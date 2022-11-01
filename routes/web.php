@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ResearchController;
 use App\Http\Controllers\ResearchDocumentController;
@@ -39,9 +40,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/research-document', [ResearchDocumentController::class, 'index'])->name('research-document.index');
     Route::resource('/research', ResearchController::class);
     Route::middleware(['role:admin|super-admin'])->group(function () {
