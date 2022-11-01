@@ -11,7 +11,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 interface Props {
     research: Research,
     isAdministrator: boolean,
-    user : User,
+    user: User,
 }
 
 export default function Show(props: Props) {
@@ -29,42 +29,50 @@ export default function Show(props: Props) {
                             <div className="flex-grow">
                                 Data Penelitian
                             </div>
-                            {props.isAdministrator || research.research_contributors[0].user.id == props.user.id ?
-                                <div className="flex gap-3">
-                                    <InertiaLink
-                                        className="btn btn-square btn-warning rounded py-2 px-10  focus:outline-none border-2"
-                                        href={route('research.edit', research.id)}
-                                    >
-                                        Edit
-                                    </InertiaLink>
-                                    <button
-                                        type="submit"
-                                        className="btn btn-square btn-error rounded  py-2 px-10 focus:outline-none border-2 "
-                                    >
-                                        <label htmlFor="my-modal">Delete</label>
-                                    </button>
-                                    <input type="checkbox" id="my-modal" className="modal-toggle" />
-                                    <div className="modal">
-                                        <div className="modal-box">
-                                            <h3 className="font-bold text-lg">Confirm to Delete</h3>
-                                            <p className="py-4">Are you sure to do this.</p>
-                                            <div className="modal-action">
-                                                <label htmlFor="my-modal" className="btn btn-error"
-                                                    onClick={
-                                                        () => {
-                                                            Inertia.post(route('research.destroy', research.id), {
-                                                                _method: 'DELETE',
-                                                            });
+                            <div className="flex gap-3">
+                                <InertiaLink
+                                    className="btn btn-square btn-primary rounded py-2 px-10  focus:outline-none border-2"
+                                    href={route('research.index')}
+                                >
+                                    Kembali
+                                </InertiaLink>
+                                {props.isAdministrator || research.research_contributors[0].user.id == props.user.id ?
+                                    <>
+                                        <InertiaLink
+                                            className="btn btn-square btn-warning rounded py-2 px-10  focus:outline-none border-2"
+                                            href={route('research.edit', research.id)}
+                                        >
+                                            Edit
+                                        </InertiaLink>
+                                        <button
+                                            type="submit"
+                                            className="btn btn-square btn-error rounded  py-2 px-10 focus:outline-none border-2 "
+                                        >
+                                            <label htmlFor="my-modal">Delete</label>
+                                        </button>
+                                        <input type="checkbox" id="my-modal" className="modal-toggle" />
+                                        <div className="modal">
+                                            <div className="modal-box">
+                                                <h3 className="font-bold text-lg">Confirm to Delete</h3>
+                                                <p className="py-4">Are you sure to do this.</p>
+                                                <div className="modal-action">
+                                                    <label htmlFor="my-modal" className="btn btn-error"
+                                                        onClick={
+                                                            () => {
+                                                                Inertia.post(route('research.destroy', research.id), {
+                                                                    _method: 'DELETE',
+                                                                });
+                                                            }
                                                         }
-                                                    }
-                                                >Yes</label>
-                                                <label htmlFor="my-modal" className="btn">No!</label>
+                                                    >Yes</label>
+                                                    <label htmlFor="my-modal" className="btn">No!</label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                : null
-                            }
+                                    </>
+                                    : null
+                                }
+                            </div>
                         </div>
                         <div className="flex-grow flex gap-5">
                             <div className="flex flex-col gap-2 basis-1/2">
@@ -91,15 +99,15 @@ export default function Show(props: Props) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        {research.research_contributors.map((contributor) => {
-                                            return (
-                                                <tr key={contributor.id} className="ml-8">
-                                                    <td>{contributor.user.name}</td>
-                                                    <td>{contributor.user.roles[0].name}</td>
-                                                    <td><strong>{contributor.contributor_type}</strong></td>
-                                                </tr>
-                                            )
-                                        })}
+                                            {research.research_contributors.map((contributor) => {
+                                                return (
+                                                    <tr key={contributor.id} className="ml-8">
+                                                        <td>{contributor.user.name}</td>
+                                                        <td>{contributor.user.roles[0].name}</td>
+                                                        <td><strong>{contributor.contributor_type}</strong></td>
+                                                    </tr>
+                                                )
+                                            })}
                                         </tbody>
                                     </table>
                                 </div>
