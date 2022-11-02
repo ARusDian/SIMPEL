@@ -113,6 +113,14 @@ class ResearchController extends Controller
         }
         
         $research->userContributors()->sync($researchContributors,$isUpdate);
+
+        $deleted_document_ids = array_diff($research->researchDocuments->pluck('id')->toArray(),array_map(fn($document) => $document['id'] ?? '', $data['research_documents']));
+        if(count($deleted_document_ids) > 0){
+            foreach($deleted_document_ids as $deleted_document_id){
+                $research->researchDocuments()->where('id',$deleted_document_id)->first()->documentFile()->first()->deleteFile();
+                $research->researchDocuments()->where('id',$deleted_document_id)->first()->documentFile()->delete();
+            }
+        }
         
         foreach($data['research_documents'] as $research_document){
             $document_file = null;
@@ -245,7 +253,7 @@ class ResearchController extends Controller
         if ($research->userContributors[0]->id == Auth::user()->id || Auth::user()->isAdmin()){
             return DB::transaction(function () use ($id, $research) {
                 foreach ($research->ResearchDocuments as $research_document) {
-                    $document_file = $research_document->documentFile->findOrFail($research_document['id']);
+                    $document_file = $research_document->documentFile()->findOrFail($research_document['id']);
                     $document_file->deleteFile();
                     $document_file->deleteResearchDirectory($research['id']);
                 }
