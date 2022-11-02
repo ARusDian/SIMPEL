@@ -19,7 +19,9 @@ interface Props {
 
 export default function ContributorForm(props: Props) {
 
-    const users = props.users.filter((user) => user.roles[0].name != 'guest');
+    const users = props.users.filter((user) =>
+        user.roles[0].name == 'dosen' || user.roles[0].name == 'mahasiswa'
+    );
 
     function handleChange<T>(callback: (args0: T) => void) {
         return (e: T) => {
@@ -56,8 +58,7 @@ export default function ContributorForm(props: Props) {
                                             key={`contributor-${index}-name`}
                                             options={users}
                                             getOptionValue={(option) => option.id.toString()}
-                                            // getOptionLabel={(option) => `${option.name} - ${option.roles.map((role) => role.name).join(', ')}`}
-                                            getOptionLabel={(option) => `${option.name}`}
+                                            getOptionLabel={(option) => `${option.name} - ${option.roles.map((role) => role.name).join(', ')}`}
                                             value={users.find((user) => user.id === contributor.user.id)}
                                             onChange={handleChange((value: any) => {
                                                 if (typeof value === 'object') {

@@ -2,6 +2,8 @@ import React from 'react';
 import Select from 'react-select';
 
 import AddNewHeader from '@/Components/AddNewHeader';
+import InputError from '@/Components/Jetstream/InputError';
+import { ErrorHelper } from '@/Models/ErrorHelper';
 import { getStorageFileUrl } from '@/Models/FileModel';
 import { getUniqueKey } from '@/Models/Helper';
 import { NewResearch } from '@/Models/Research/Research';
@@ -20,7 +22,8 @@ interface Props {
     onChange: (value: Array<NewResearchDocument>) => void
 }
 export default function DocumentForm(props: Props) {
-    console.log(props.categories);
+    let errors = new ErrorHelper(props.form.errors);
+
     function handleChange<T>(callback: (args0: T) => void) {
         return (e: T) => {
             callback(e);
@@ -55,19 +58,21 @@ export default function DocumentForm(props: Props) {
                                                 key={`document-${getUniqueKey(research_document)}-name`}
                                                 type="text"
                                                 className="input w-full"
+                                                required
                                                 value={props.form.data.research_documents[index].name}
                                                 onChange={handleChange(e => {
                                                     research_document.name = e.target.value;
                                                 })}
                                             />
+                                            <InputError message={errors.getChild('research_documents', 'name')} className="mt-2" />
                                         </div>
                                         <div className="flex-1">
                                             <label className="label" htmlFor={`document_category_${index}`}>
                                                 Kategori Dokumen
                                             </label>
                                             <Select
-                                                id="research_leader"
-                                                key={`contributor-${index}-name`}
+                                                id={`document_category_${index}`}
+                                                key={`document-${getUniqueKey(research_document)}-category`}
                                                 options={props.categories}
                                                 className="input w-full border-ghost"
                                                 getOptionValue={(option) => option.id!.toString()}
@@ -77,6 +82,7 @@ export default function DocumentForm(props: Props) {
                                                     research_document.research_document_category = e as ResearchDocumentCategory
                                                 )}
                                             />
+                                            <InputError message={errors.getChild('research_documents', 'category')} className="mt-2" />
                                         </div>
                                         <div>
                                             <label className="label" htmlFor={`document_file_${index}`}>
@@ -87,6 +93,7 @@ export default function DocumentForm(props: Props) {
                                                 key={`document-${getUniqueKey(research_document)}-file`}
                                                 type="file"
                                                 className="input p-2"
+                                                accept="application/pdf"
                                                 onChange={handleChange((e: any) => {
                                                     research_document.document_file.file = e.target.files.item(0);
                                                     research_document.name = e.target.files.item(0).name;
@@ -96,6 +103,7 @@ export default function DocumentForm(props: Props) {
                                                 <span className="label-text-alt"></span>
                                                 <span className="label-text-alt">Dalam bentuk PDF</span>
                                             </label>
+                                            <InputError message={errors.getChild('research_documents','file')} className="mt-2" />
                                         </div>
                                         <button
                                             className="btn btn-error btn-md"
