@@ -1,16 +1,17 @@
-import { InertiaLink, useForm, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React from 'react';
-import useRoute from '@/Hooks/useRoute';
-import useTypedPage from '@/Hooks/useTypedPage';
+
 import AuthenticationCard from '@/Components/Jetstream/AuthenticationCard';
 import Checkbox from '@/Components/Jetstream/Checkbox';
+import InputError from '@/Components/Jetstream/InputError';
 import InputLabel from '@/Components/Jetstream/InputLabel';
 import PrimaryButton from '@/Components/Jetstream/PrimaryButton';
 import TextInput from '@/Components/Jetstream/TextInput';
-import InputError from '@/Components/Jetstream/InputError';
-import Tabs from '@mui/material/Tabs';
+import useRoute from '@/Hooks/useRoute';
+import useTypedPage from '@/Hooks/useTypedPage';
+import { Head, InertiaLink, useForm } from '@inertiajs/inertia-react';
 import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -30,7 +31,7 @@ function TabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <div className=''>
+        <div className='py-5'>
           <div className="text-lg">
             {children}
           </div>
@@ -69,7 +70,6 @@ export default function Register() {
       onFinish: () => form.reset('password', 'password_confirmation'),
     });
   }
-  console.log(form.data);
 
   const [tabIndex, setTabIndex] = React.useState(0);
   const handleOnTabChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -181,7 +181,7 @@ export default function Register() {
               </div>
             </>
           )}
-          <div className='flex justify-between mt-4'>
+          <div className='flex justify-between mt-4 gap-5'>
             <InertiaLink
               href={route('login')}
               className="underline text-sm text-gray-600 hover:text-gray-900"
@@ -275,7 +275,7 @@ export default function Register() {
               </InputLabel>
             </div>
           )}
-          <div className="flex items-center justify-between mt-4">
+          <div className="flex items-center justify-between mt-4 gap-5">
             <button
               className='inline-flex items-center px-4 py-2 bg-sky-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition'
               onClick={() => setTabIndex(0)}
