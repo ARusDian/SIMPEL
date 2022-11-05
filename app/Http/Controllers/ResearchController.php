@@ -74,7 +74,7 @@ class ResearchController extends Controller
                 ],  'prohibited')
             ],
             'research_documents.*.document_file.file' => [
-                Rule::when($research, 'required_without:research_documents.*.document_file.id', 'required'),
+                Rule::when($research, 'required_without:research_documents.*.document_file.id', 'required|file|max:10240'),
             ],
             'research_documents.*.name' => [
                 'required',
