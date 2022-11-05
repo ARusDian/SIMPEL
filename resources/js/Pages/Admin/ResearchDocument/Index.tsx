@@ -48,11 +48,6 @@ export default function Index(props: Props) {
                                 <div className="text-2xl">
                                     Seluruh Dokumen
                                 </div>
-                                {/* <div className="text-md my-3">
-                                    <InertiaLink href={route('research.create')} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                        Tambah Penelitian
-                                    </InertiaLink>
-                                </div> */}
                             </div>
                             <div className="mt-6 text-gray-500">
                                 <MaterialReactTable
