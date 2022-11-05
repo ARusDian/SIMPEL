@@ -275,7 +275,14 @@ export default function Register() {
               </InputLabel>
             </div>
           )}
-          <div className="flex items-center justify-between mt-4 gap-5">
+          <InertiaLink
+            href={route('login')}
+            className="inline-flex md:hidden mt-4 underline text-sm text-gray-900 hover:text-gray-900"
+          >
+            Already registered?
+          </InertiaLink>
+          <div className="flex items-center justify-between mt-4">
+            
             <button
               className='inline-flex items-center px-4 py-2 bg-sky-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition'
               onClick={() => setTabIndex(0)}
@@ -284,7 +291,7 @@ export default function Register() {
             </button>
             <InertiaLink
               href={route('login')}
-              className="underline text-sm text-gray-900 hover:text-gray-900"
+              className="hidden md:inline-flex underline text-sm text-gray-900 hover:text-gray-900"
             >
               Already registered?
             </InertiaLink>

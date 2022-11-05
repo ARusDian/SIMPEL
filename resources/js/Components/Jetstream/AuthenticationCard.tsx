@@ -27,7 +27,7 @@ export default function AuthenticationCard({
             <AuthenticationCardLogo />
           </figure>
           <div className="card-body ">
-            <div className='flex flex-col'>
+            <div className='flex flex-col text-black'>
               <div className='text-2xl m-auto font-semibold'>
                 SIMPEL
               </div>
@@ -35,7 +35,7 @@ export default function AuthenticationCard({
                 Sistem Informasi Manajemen Penelitian
               </div>
             </div>
-            <div className="mt-6 py-4 sm:rounded-lg text-black">
+            <div className="mt-6 py-4 sm:rounded-lg ">
               {children}
             </div>
           </div>
