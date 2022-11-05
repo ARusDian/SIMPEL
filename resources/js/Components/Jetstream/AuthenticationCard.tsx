@@ -35,7 +35,7 @@ export default function AuthenticationCard({
                 Sistem Informasi Manajemen Penelitian
               </div>
             </div>
-            <div className="mt-6 py-4 sm:rounded-lg  font-bold">
+            <div className="mt-6 py-4 sm:rounded-lg text-black">
               {children}
             </div>
           </div>
