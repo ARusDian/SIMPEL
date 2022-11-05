@@ -1,11 +1,12 @@
-import AppLayout from "@/Layouts/AppLayout";
-import React from "react";
 import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
-import { InertiaLink } from "@inertiajs/inertia-react";
-import route from "ziggy-js";
-import { Inertia } from "@inertiajs/inertia";
-import { ResearchDocument } from "@/Models/Research/ResearchDocument";
-import { Research } from "@/Models/Research/Research";
+import React from 'react';
+import route from 'ziggy-js';
+
+import AppLayout from '@/Layouts/AppLayout';
+import { Research } from '@/Models/Research/Research';
+import { ResearchDocument } from '@/Models/Research/ResearchDocument';
+import { Inertia } from '@inertiajs/inertia';
+import { InertiaLink } from '@inertiajs/inertia-react';
 
 interface ResearchDocumentToResearch extends ResearchDocument {
     research: Research
@@ -17,8 +18,6 @@ interface Props {
 
 export default function Index(props: Props) {
     const research_documents = props.research_documents;
-
-    console.log(research_documents);
 
     const dataColumns = [
         {
