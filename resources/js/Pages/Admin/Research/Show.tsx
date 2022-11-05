@@ -133,6 +133,7 @@ export default function Show(props: Props) {
                                         <table className="border table table-zebra ">
                                             <thead>
                                                 <tr>
+                                                    <th className="border border-gray-300 px-4 py-2">Tampilkan</th>
                                                     <th className="border border-gray-300 px-4 py-2 w-auto">Nama Dokumen</th>
                                                     <th className="border border-gray-300 px-4 py-2">Tipe Dokumen</th>
                                                     <th className="border border-gray-300 px-4 py-2 w-auto">Kategori Dokumen</th>
@@ -141,6 +142,15 @@ export default function Show(props: Props) {
                                             <tbody>
                                                 {research.research_documents.map((document, index) =>
                                                     <tr key={index}>
+                                                        <td className="border border-gray-300 px-4 py-2">
+                                                            <a
+                                                                className='btn btn-square btn-primary rounded py-2 px-10  focus:outline-none border-2'
+                                                                href={getStorageFileUrl(document.document_file)}
+                                                                target="_blank"
+                                                                rel="noreferrer">
+                                                                Lihat
+                                                            </a>
+                                                        </td>
                                                         <td className="border border-gray-300 px-4 py-2  w-auto">
                                                             <a href={getStorageFileUrl(document.document_file)} target="_blank" rel="noreferrer">
                                                                 {document.name}

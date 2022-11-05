@@ -65,7 +65,7 @@ export default function Index(props: Props) {
                                     renderRowActions={({ row }) => (
                                         <div className="flex items-center justify-center gap-2">
                                             <InertiaLink href={route('research.show', row.original.research.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                                Show
+                                                Penelitian
                                             </InertiaLink>
                                         </div>
                                     )}
