@@ -1,12 +1,13 @@
 import classNames from 'classnames';
 import React from 'react';
-import useRoute from '@/Hooks/useRoute';
+
 import AuthenticationCard from '@/Components/Jetstream/AuthenticationCard';
 import Checkbox from '@/Components/Jetstream/Checkbox';
+import InputError from '@/Components/Jetstream/InputError';
 import InputLabel from '@/Components/Jetstream/InputLabel';
 import PrimaryButton from '@/Components/Jetstream/PrimaryButton';
 import TextInput from '@/Components/Jetstream/TextInput';
-import InputError from '@/Components/Jetstream/InputError';
+import useRoute from '@/Hooks/useRoute';
 import { Head, InertiaLink, useForm } from '@inertiajs/inertia-react';
 
 interface Props {
@@ -75,16 +76,16 @@ export default function Login({ canResetPassword, status }: Props) {
                 form.setData('remember', e.currentTarget.checked ? 'on' : '')
               }
             />
-            <span className="ml-2 text-sm text-gray-600">Remember me</span>
+            <span className="ml-2 text-sm text-black">Remember me</span>
           </label>
         </div>
 
-        <div className="flex flex-col space-y-2 md:flex-row md:items-center md:justify-between md:space-y-0 mt-4">
+        <div className="flex flex-col space-y-2 md:flex-row md:items-center md:justify-end md:space-y-0 mt-4">
           {canResetPassword && (
             <div>
               <InertiaLink
                 href={route('password.request')}
-                className="underline text-sm text-gray-600 hover:text-gray-900"
+                className="underline text-sm text-gray-900 hover:text-gray-900"
               >
                 Forgot your password?
               </InertiaLink>

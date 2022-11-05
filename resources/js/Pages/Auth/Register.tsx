@@ -184,7 +184,7 @@ export default function Register() {
           <div className='flex justify-between mt-4 gap-5'>
             <InertiaLink
               href={route('login')}
-              className="underline text-sm text-gray-600 hover:text-gray-900"
+              className="underline text-sm text-gray-900 hover:text-gray-900"
             >
               Already registered?
             </InertiaLink>
@@ -284,7 +284,7 @@ export default function Register() {
             </button>
             <InertiaLink
               href={route('login')}
-              className="underline text-sm text-gray-600 hover:text-gray-900"
+              className="underline text-sm text-gray-900 hover:text-gray-900"
             >
               Already registered?
             </InertiaLink>
