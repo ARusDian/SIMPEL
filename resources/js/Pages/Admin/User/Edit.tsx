@@ -35,7 +35,6 @@ export default function Edit(props: Props) {
         form.data._method = 'PUT';
         form.post(route('user.update', user.id), {
             onError: (errors) => {
-                console.log(form.data);
                 console.log(errors);
             },
             onSuccess: () => {

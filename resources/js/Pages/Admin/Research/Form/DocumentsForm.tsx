@@ -48,7 +48,7 @@ export default function DocumentForm(props: Props) {
                         props.form.data.research_documents.map((research_document, index) => {
                             return (
                                 <div key={getUniqueKey(research_document)}>
-                                    <div className="my-5 flex gap-2">
+                                    <div className="my-5 flex flex-col md:flex-row  gap-2">
                                         <div className="flex-1">
                                             <label className="label" htmlFor={`document_name_${index}`}>
                                                 Nama Dokumen
@@ -92,7 +92,7 @@ export default function DocumentForm(props: Props) {
                                                 id={`document_file_${index}`}
                                                 key={`document-${getUniqueKey(research_document)}-file`}
                                                 type="file"
-                                                className="input p-2"
+                                                className="p-2 md:input"
                                                 accept="application/pdf"
                                                 onChange={handleChange((e: any) => {
                                                     research_document.document_file.file = e.target.files.item(0);
@@ -100,7 +100,7 @@ export default function DocumentForm(props: Props) {
                                                 })}
                                             />
                                             <label className="label" htmlFor={`document_file_${index}`}>
-                                                <span className="label-text-alt"></span>
+                                                <span className="label-text-alt">Maksimal 10 MB</span>
                                                 <span className="label-text-alt">Dalam bentuk PDF</span>
                                             </label>
                                             <InputError message={errors.getChild('research_documents','file')} className="mt-2" />

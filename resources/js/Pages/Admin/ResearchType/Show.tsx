@@ -25,10 +25,10 @@ export default function Show(props: Props) {
                     <div className="p-6 sm:px-20 bg-white border-b border-gray-200">
                         <div className="flex flex-col gap-3 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                             <div className='flex justify-between'>
-                                <div className='text-2xl'>
+                                <div className="text-lg md:text-3xl">
                                     Data Tipe Penelitian
                                 </div>
-                                <div className='flex gap-2'>
+                                <div className="flex flex-col md:flex-row gap-3">
                                     <InertiaLink
                                         className="btn btn-square btn-primary rounded py-2 px-10  focus:outline-none border-2"
                                         href={route('research-type.index')}

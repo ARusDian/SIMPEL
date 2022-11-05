@@ -35,8 +35,8 @@ export default function Index(props: Props) {
                                 <div className="text-2xl">
                                     Kategori Dokumen
                                 </div>
-                                <div className="text-md my-3">
-                                    <InertiaLink href={route('research-document-category.create')} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <div className="btn btn-primary text-md my-3">
+                                <InertiaLink href={route('research-document-category.create')}>
                                         Tambah Kategori
                                     </InertiaLink>
                                 </div>

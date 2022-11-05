@@ -28,7 +28,6 @@ export default function Create(props: Props) {
         form.clearErrors();
         form.post(route('research.store'), {
             onError: (errors) => { 
-                console.log(form.data);
                 console.log(errors);
             },
             onSuccess: () => {
@@ -42,8 +41,8 @@ export default function Create(props: Props) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                        <div className="mt-8 flex justify-between">
-                            <div className="text-2xl">
+                        <div className="mt-8 flex justify-between px-2 gap-2">
+                            <div className="text-xl md:text-2xl">
                                 Tambah Penelitian Baru
                             </div>
                             <div className="text-md my-3">

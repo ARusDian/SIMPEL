@@ -43,14 +43,16 @@ export default function AppLayout({
                                     </label>
                                 </button>
                             </div>
-                            <a className="btn btn-ghost normal-case text-xl" href={route('dashboard')}>Dashboard</a>
-                            <ul className="menu menu-horizontal p-0">
-                                <li>
-                                    <InertiaLink href={route('research.create')}>
-                                        Tambah Penelitian Baru
-                                    </InertiaLink>
-                                </li>
-                            </ul>
+                            <div className='hidden md:flex'>
+                                <a className="btn btn-ghost normal-case text-xl" href={route('dashboard')}>Dashboard</a>
+                                <ul className="menu menu-horizontal p-0">
+                                    <li>
+                                        <InertiaLink href={route('research.create')}>
+                                            Tambah Penelitian Baru
+                                        </InertiaLink>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                         <div className="navbar-end mr-10">
                             <div className="dropdown dropdown-hover dropdown-end ">
@@ -60,19 +62,6 @@ export default function AppLayout({
                                     </div>
                                 </label>
                                 <ul tabIndex={0} className="dropdown-content menu p-2 gap-2 shadow bg-base-100 rounded-box w-40 top-10">
-                                    {/* <li>
-                                        <div className="flex items-center px-4">
-                                            {page.props.jetstream.managesProfilePhotos ? (
-                                                <div className="flex-shrink-0 mr-3">
-                                                    <img
-                                                        className="h-10 w-10 rounded-full object-cover"
-                                                        src={page.props.user.profile_photo_url}
-                                                        alt={page.props.user.name}
-                                                    />
-                                                </div>
-                                            ) : null}
-                                        </div>
-                                    </li> */}
                                     <li className="z-50">
                                         <ResponsiveNavLink
                                             href={route('profile.show')}
@@ -92,11 +81,38 @@ export default function AppLayout({
                         </div>
                     </div>
                     {/* End of Navbar */}
-                    <main>{children}</main>
+                    <div className='mx-7'>
+                        <main>{children}</main>
+                    </div>
                 </div>
                 <div className="drawer-side text-white">
                     <label htmlFor="my-drawer" className="drawer-overlay "></label>
                     <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content font-medium ">
+                        <div className='md:hidden'>
+                            <div className="divider">SIMPEL</div>
+                            <li>
+                                <div className="dropdown dropdown-hover dropdown-end">
+                                    <ul className="flex flex-col gap-5">
+                                        <InertiaLink href={route('dashboard')}>
+                                            <label>
+                                                Dashboard
+                                            </label>
+                                        </InertiaLink>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <div className="dropdown dropdown-hover dropdown-end">
+                                    <ul className="flex flex-col gap-5">
+                                        <InertiaLink href={route('research.create')}>
+                                            <label>
+                                                Tambah Penelitian Baru
+                                            </label>
+                                        </InertiaLink>
+                                    </ul>
+                                </div>
+                            </li>
+                        </div>
                         {page.props.isAdministrator ? (
                             <>
                                 <div className="divider">Admin Only</div>
@@ -155,7 +171,7 @@ export default function AppLayout({
                                                     Kategori Dokumen Penelitian
                                                 </InertiaLink>
                                             </li>
-                                            
+
                                         </ul>
                                     </div>
                                 </li>
@@ -175,6 +191,12 @@ export default function AppLayout({
                                 </ul>
                             </div>
                         </li>
+                        <div className="divider"></div>
+                        <button className="block lg:hidden">
+                            <label htmlFor="my-drawer" className="btn btn-ghost drawer-button text-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+                            </label>
+                        </button>
                     </ul>
                 </div>
             </div>

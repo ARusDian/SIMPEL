@@ -13,11 +13,10 @@ export default function Dashboard(props : Props) {
     <AppLayout
       title="Dashboard"
     >
-      <div className="py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
           <div className="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
             <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
-              <div className='my-4 flex flex-col gap-2'>
+              <div className='my-4 flex flex-col gap-5'>
                 <div className='text-3xl lg:text-6xl font-bold'>
                   Selamat Datang di SIMPEL ITK
                 </div>
@@ -44,7 +43,6 @@ export default function Dashboard(props : Props) {
             </div>
           </div>
         </div>
-      </div>
     </AppLayout>
   );
 }

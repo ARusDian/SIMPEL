@@ -7,8 +7,6 @@ import AppLayout from '@/Layouts/AppLayout';
 import { User } from '@/types';
 import { Inertia } from '@inertiajs/inertia';
 import { InertiaLink } from '@inertiajs/inertia-react';
-import Delete from '@mui/icons-material/Delete';
-import Edit from '@mui/icons-material/Edit';
 
 interface Props {
     users: Array<User>,
@@ -16,29 +14,6 @@ interface Props {
 
 export default function Index(props: Props) {
     const users = props.users;
-
-    function onDelete(e: React.FormEvent, id: number) {
-        e.preventDefault();
-        console.log('calling confirm alert');
-        confirmAlert({
-            title: 'Confirm to submit',
-            message: 'Are you sure to do this.',
-            buttons: [
-                {
-                    label: 'Yes',
-                    onClick: () => {
-                        Inertia.post(route('user.destroy', id), {
-                            _method: 'DELETE',
-                        });
-                    },
-                },
-                {
-                    label: 'Cancel',
-                    onClick: () => { },
-                },
-            ],
-        });
-    }
 
     const dataColumns = [
         {
@@ -68,10 +43,9 @@ export default function Index(props: Props) {
                                 <div className="mt-8 text-2xl">
                                     Users
                                 </div>
-                                <div className='align-bottom'>
+                                <div className="btn btn-primary text-md my-3">
                                     <InertiaLink
                                         href={route('user.create')}
-                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-auto"
                                     >
                                         Tambah User
                                     </InertiaLink>
@@ -92,7 +66,8 @@ export default function Index(props: Props) {
                                     muiTableBodyRowProps={{ hover: false }}
                                     renderRowActions={({ row }) => (
                                         <div className="flex items-center justify-center gap-2">
-                                            <InertiaLink href={route('user.show', row.original.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                            <InertiaLink href={route('user.show', row.original.id)} 
+                                                className="btn btn-primary text-md my-3">
                                                 Show
                                             </InertiaLink>
                                         </div>

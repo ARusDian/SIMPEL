@@ -24,12 +24,12 @@ export default function Show(props: Props) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="flex flex-col">
+                    <div className="flex flex-col gap-5">
                         <div className="basis-1/12 flex justify-between">
-                            <div className="flex-grow">
+                            <div className="text-lg md:text-3xl">
                                 Data Penelitian
                             </div>
-                            <div className="flex gap-3">
+                            <div className="flex flex-col md:flex-row gap-3">
                                 <InertiaLink
                                     className="btn btn-square btn-primary rounded py-2 px-10  focus:outline-none border-2"
                                     href={route('research.index')}
@@ -74,7 +74,7 @@ export default function Show(props: Props) {
                                 }
                             </div>
                         </div>
-                        <div className="flex-grow flex gap-5">
+                        <div className="flex flex-col md:flex-row gap-5">
                             <div className="flex flex-col gap-2 basis-1/2">
                                 <div>
                                     Nama Penelitian : <strong>{research.name}</strong>
@@ -88,63 +88,83 @@ export default function Show(props: Props) {
                                         {research.description}
                                     </div>
                                 </div>
-                                <div>
-                                    Daftar Kontributor
-                                    <table className="border table table-zebra w-full">
-                                        <thead>
-                                            <tr>
-                                                <th className="border border-gray-300 px-4 py-2">Nama anggota</th>
-                                                <th className="border border-gray-300 px-4 py-2">Jabatab</th>
-                                                <th className="border border-gray-300 px-4 py-2">Kontribusi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {research.research_contributors.map((contributor) => {
-                                                return (
-                                                    <tr key={contributor.id} className="ml-8">
-                                                        <td>{contributor.user.name}</td>
-                                                        <td>{contributor.user.roles[0].name}</td>
-                                                        <td><strong>{contributor.contributor_type}</strong></td>
+                                {research.research_contributors.length > 0 ?
+                                    (
+                                        <div className="flex flex-col gap-2 basis-1/2 max-w-screen">
+                                            <div className="basis-1/12 text-lg">
+                                                Daftar Kontributor
+                                            </div>
+                                            <table className="border table table-zebra w-full">
+                                                <thead>
+                                                    <tr>
+                                                        <th className="border border-gray-300 px-4 py-2">Nama anggota</th>
+                                                        <th className="border border-gray-300 px-4 py-2">Jabatan</th>
+                                                        <th className="border border-gray-300 px-4 py-2">Kontribusi</th>
                                                     </tr>
-                                                )
-                                            })}
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                </thead>
+                                                <tbody>
+                                                    {research.research_contributors.map((contributor) => {
+                                                        return (
+                                                            <tr key={contributor.id} className="ml-8">
+                                                                <td>{contributor.user.name}</td>
+                                                                <td>{contributor.user.roles[0].name}</td>
+                                                                <td><strong>{contributor.contributor_type}</strong></td>
+                                                            </tr>
+                                                        )
+                                                    })}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    ) : (
+                                        <div className="flex flex-col gap-2 basis-1/2 max-w-screen">
+                                            <div className="basis-1/12 text-lg">
+                                                Tidak ada Kontributor
+                                            </div>
+                                        </div>
+                                    )
+                                }
                             </div>
-                            <div className="flex flex-col gap-2 basis-1/2">
-                                <div className="basis-1/12">
-                                    Dokumen Penelitian
-                                </div>
-                                <div>
-                                    <table className="border table table-zebra w-full">
-                                        <thead>
-                                            <tr>
-                                                <th className="border border-gray-300 px-4 py-2">Nama Dokumen</th>
-                                                <th className="border border-gray-300 px-4 py-2">Tipe Dokumen</th>
-                                                <th className="border border-gray-300 px-4 py-2">Kategori Dokumen</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {research.research_documents.map((document, index) =>
-                                                <tr key={index}>
-                                                    <td className="border border-gray-300 px-4 py-2">
-                                                        <a href={getStorageFileUrl(document.document_file)} target="_blank" rel="noreferrer">
-                                                            {document.name}
-                                                        </a>
-                                                    </td>
-                                                    <td className="border border-gray-300 px-4 py-2">
-                                                        {document.research_document_category.type}
-                                                    </td>
-                                                    <td className="border border-gray-300 px-4 py-2">
-                                                        {document.research_document_category.name}
-                                                    </td>
+                            {research.research_documents.length > 0 ?
+                                (
+                                    <div className="flex flex-col gap-2 basis-1/2 max-w-screen">
+                                        <div className="basis-1/12 text-lg">
+                                            Dokumen Penelitian
+                                        </div>
+                                        <table className="border table table-zebra ">
+                                            <thead>
+                                                <tr>
+                                                    <th className="border border-gray-300 px-4 py-2 w-auto">Nama Dokumen</th>
+                                                    <th className="border border-gray-300 px-4 py-2">Tipe Dokumen</th>
+                                                    <th className="border border-gray-300 px-4 py-2 w-auto">Kategori Dokumen</th>
                                                 </tr>
-                                            )}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                                            </thead>
+                                            <tbody>
+                                                {research.research_documents.map((document, index) =>
+                                                    <tr key={index}>
+                                                        <td className="border border-gray-300 px-4 py-2  w-auto">
+                                                            <a href={getStorageFileUrl(document.document_file)} target="_blank" rel="noreferrer">
+                                                                {document.name}
+                                                            </a>
+                                                        </td>
+                                                        <td className="border border-gray-300 px-4 py-2">
+                                                            {document.research_document_category.type}
+                                                        </td>
+                                                        <td className="border border-gray-300 px-4 py-2">
+                                                            {document.research_document_category.name}
+                                                        </td>
+                                                    </tr>
+                                                )}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                ) : (
+                                    <div className="flex flex-col gap-2 basis-1/2 max-w-screen">
+                                        <div className="basis-1/12 text-lg">
+                                            Tidak ada Dokumen Penelitian
+                                        </div>
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </div>

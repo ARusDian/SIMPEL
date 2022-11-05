@@ -31,7 +31,6 @@ export default function Create(props: Props) {
         form.clearErrors();
         form.post(route('user.store'), {
             onError: (errors) => {
-                console.log(form.data);
                 console.log(errors);
             },
             onSuccess: () => {
