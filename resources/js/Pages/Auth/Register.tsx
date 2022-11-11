@@ -127,7 +127,7 @@ export default function Register() {
             <InputLabel htmlFor="role">Status Warga ITK </InputLabel>
             <select
               id="role"
-              className="mt-1 block w-1/2"
+              className="mt-1 block w-full md:w-1/2"
               value={form.data.role}
               onChange={e => form.setData('role', e.currentTarget.value)}
             >

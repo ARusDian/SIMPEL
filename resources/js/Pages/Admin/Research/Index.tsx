@@ -30,7 +30,9 @@ export default function Index(props: Props) {
                     <div className="flex-col gap-2">
                         {
                             cell.row.original.research_contributors.length > 0 ?
-                                cell.row.original.research_contributors.map((contributor: ResearchContributor, index) =>
+                                cell.row.original.research_contributors
+                                    .sort((a, b) => a.contributor_type < b.contributor_type ? 1 : -1)
+                                    .map((contributor: ResearchContributor, index) =>
                                 (
                                     <div key={contributor.id}>
                                         <p>{index + 1}. {contributor.user.name} - {contributor.contributor_type}</p>

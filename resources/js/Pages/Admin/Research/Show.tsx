@@ -17,6 +17,7 @@ interface Props {
 export default function Show(props: Props) {
     let research = props.research;
     research.research_documents = research.research_documents.sort((a, b) => a.research_document_category.type < b.research_document_category.type ? 1 : -1);
+    research.research_contributors = research.research_contributors.sort((a, b) => a.contributor_type < b.contributor_type ? 1 : -1);
     return (
         <AppLayout
             title={`Penelitian ${research.name}`}
@@ -36,7 +37,11 @@ export default function Show(props: Props) {
                                 >
                                     Kembali
                                 </InertiaLink>
-                                {props.isAdministrator || research.research_contributors[0].user.id == props.user.id ?
+                                {props.isAdministrator || research.research_contributors.filter(
+                                    (contributor) =>
+                                        contributor.user.id === props.user.id &&
+                                        contributor.contributor_type === 'ketua'
+                                ).length > 0 ?
                                     <>
                                         <InertiaLink
                                             className="btn btn-square btn-warning rounded py-2 px-10  focus:outline-none border-2"
@@ -74,7 +79,7 @@ export default function Show(props: Props) {
                                 }
                             </div>
                         </div>
-                        <div className="flex flex-col md:flex-row gap-5">
+                        <div className="flex flex-col lg:flex-row gap-5">
                             <div className="flex flex-col gap-2 basis-1/2">
                                 <div>
                                     Nama Penelitian : <strong>{research.name}</strong>
@@ -126,17 +131,17 @@ export default function Show(props: Props) {
                             </div>
                             {research.research_documents.length > 0 ?
                                 (
-                                    <div className="flex flex-col gap-2 basis-1/2 max-w-screen">
+                                    <div className="flex flex-col gap-2 basis-1/2">
                                         <div className="basis-1/12 text-lg">
                                             Dokumen Penelitian
                                         </div>
-                                        <table className="border table table-zebra ">
+                                        <table className="border table-zebra table-fixed p-2 md:table-auto">
                                             <thead>
                                                 <tr>
-                                                    <th className="border border-gray-300 px-4 py-2">Tampilkan</th>
-                                                    <th className="border border-gray-300 px-4 py-2 w-auto">Nama Dokumen</th>
-                                                    <th className="border border-gray-300 px-4 py-2">Tipe Dokumen</th>
-                                                    <th className="border border-gray-300 px-4 py-2 w-auto">Kategori Dokumen</th>
+                                                    <th className="border border-gray-300 px-2 py-2 w-1/6 md:w-auto">Tampilkan</th>
+                                                    <th className="border border-gray-300 px-2 py-2 w-1/5 md:w-auto">Nama Dokumen</th>
+                                                    <th className="border border-gray-300 px-2 py-2 w-1/6 md:w-auto">Tipe Dokumen</th>
+                                                    <th className="border border-gray-300 px-2 py-2 w-1/5 md:w-auto">Kategori Dokumen</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -151,7 +156,7 @@ export default function Show(props: Props) {
                                                                 Lihat
                                                             </a>
                                                         </td>
-                                                        <td className="border border-gray-300 px-4 py-2  w-auto">
+                                                        <td className="border border-gray-300 px-4 py-2 md:w-auto">
                                                             <a href={getStorageFileUrl(document.document_file)} target="_blank" rel="noreferrer">
                                                                 {document.name}
                                                             </a>
