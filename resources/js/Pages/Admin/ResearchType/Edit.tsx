@@ -23,7 +23,7 @@ export default function Edit(props: Props) {
         // php does'nt support PUT so...
         // @ts-ignore
         form.data._method = 'PUT';
-        form.post(route('research-document-category.update', research_type.id), {
+        form.post(route('research-type.update', research_type.id), {
             onError: (errors) => {
                 console.log(form.data);
                 console.log(errors);
