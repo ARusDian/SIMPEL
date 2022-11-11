@@ -46,11 +46,20 @@ export default function AppLayout({
                             <div className='hidden md:flex'>
                                 <a className="btn btn-ghost normal-case text-xl" href={route('dashboard')}>Dashboard</a>
                                 <ul className="menu menu-horizontal p-0">
-                                    <li>
+                                    {page.props.user.roles.filter(role => role.name === 'guest').length > 0 ? (
+                                        <li>
+                                            <InertiaLink href={route('research.create')}>
+                                                Daftar Penelitian
+                                            </InertiaLink>
+                                        </li>
+                                    ): (
+                                            <li>
                                         <InertiaLink href={route('research.create')}>
                                             Tambah Penelitian Baru
                                         </InertiaLink>
-                                    </li>
+                                        </li>
+                                    )
+                                    }
                                 </ul>
                             </div>
                         </div>
@@ -75,7 +84,8 @@ export default function AppLayout({
                                             <ResponsiveNavLink as="button">
                                                 Log Out
                                             </ResponsiveNavLink>
-                                        </form></li>
+                                        </form>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -101,17 +111,31 @@ export default function AppLayout({
                                     </ul>
                                 </div>
                             </li>
-                            <li>
-                                <div className="dropdown dropdown-hover dropdown-end">
-                                    <ul className="flex flex-col gap-5">
-                                        <InertiaLink href={route('research.create')}>
-                                            <label>
-                                                Tambah Penelitian Baru
-                                            </label>
-                                        </InertiaLink>
-                                    </ul>
-                                </div>
-                            </li>
+                            {page.props.user.roles.filter(role => role.name === 'guest').length > 0 ? (
+                                <li>
+                                    <div className="dropdown dropdown-hover dropdown-end">
+                                        <ul className="flex flex-col gap-5">
+                                            <InertiaLink href={route('research.index')}>
+                                                <label>
+                                                    Daftar Penelitian
+                                                </label>
+                                            </InertiaLink>
+                                        </ul>
+                                    </div>
+                                </li>
+                            ) : (
+                                <li>
+                                    <div className="dropdown dropdown-hover dropdown-end">
+                                        <ul className="flex flex-col gap-5">
+                                            <InertiaLink href={route('research.create')}>
+                                                <label>
+                                                    Tambah Penelitian Baru
+                                                </label>
+                                            </InertiaLink>
+                                        </ul>
+                                    </div>
+                                </li>
+                            )}
                         </div>
                         {page.props.isAdministrator ? (
                             <>
@@ -199,7 +223,7 @@ export default function AppLayout({
                         </button>
                     </ul>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
