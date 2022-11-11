@@ -48,7 +48,7 @@ export default function AppLayout({
                                 <ul className="menu menu-horizontal p-0">
                                     {page.props.user.roles.filter(role => role.name === 'guest').length > 0 ? (
                                         <li>
-                                            <InertiaLink href={route('research.create')}>
+                                            <InertiaLink href={route('research.index')}>
                                                 Daftar Penelitian
                                             </InertiaLink>
                                         </li>
