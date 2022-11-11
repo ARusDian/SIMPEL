@@ -225,11 +225,16 @@ class ResearchController extends Controller
         $research = Research::findOrFail($id);
         if ($research->userContributors[0]->id == Auth::user()->id || Auth::user()->isAdmin()){
             return DB::transaction(function () use ($request, $research) {
-                $research->update($request->validate([
+                $request->validate([
                     'name'=>'required',
                     'description'=>'required',
                     'research_type.id'=>'required',
-                ]));
+                ]);
+                $research->update([
+                    'name'=> $request->name,
+                    'description' =>  $request->description,
+                    'research_type_id' => $request->research_type['id'],
+                ]);
                 $research_documents = $this->validateData($request->all(), $research);
                 $this->store_has_many($research, $research_documents, true);
                 return redirect()->route('research.show', $research->id)->banner('Research updated successfully.');
